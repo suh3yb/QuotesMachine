@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './App.css';
 import loading from './img/loading.gif';
 import fetchQuote from './fetchQuote';
@@ -10,6 +10,7 @@ class App extends React.Component {
       author: '',
       quote: '',
       loading: true,
+      fontIndex: 0,
     };
 
     this.renderText = this.renderText.bind(this);
@@ -29,26 +30,48 @@ class App extends React.Component {
         setTimeout(() => showText(text, key, index), 20);
       }
     };
-    this.setState({ loading: false });
+    let fontIndex = Math.floor(Math.random() * 7);
+    this.setState({ loading: false, fontIndex });
     showText(content, 'quote', 0);
     showText(author, 'author', 0);
   }
 
   render() {
+    const fontPairs = [
+      ['Yeon Sung, cursive', 'Roboto, sans-serif'],
+      ['McLaren, cursive', 'Open Sans, sans-serif'],
+      ['Supermercado One, cursive', 'Open Sans, sans-serif'],
+      ['Rubik, sans-serif', 'Roboto, sans-serif'],
+      ['Lobster, cursive', 'Roboto, sans-serif'],
+      ['Indie Flower, cursive', 'Open Sans, sans-serif'],
+      ['Sunshiney, cursive', 'Lato, sans-serif'],
+    ];
+
+    let [quoteFont, bodyFont] = fontPairs[this.state.fontIndex];
+
     return (
       <div id="quote-box">
         {this.state.loading ? (
           <img className="spinner" src={loading} alt="loading" />
         ) : (
-          <Fragment>
-            <h1 id="text">{this.state.quote}</h1>
-            <p id="author">{'- ' + this.state.author}</p>
-          </Fragment>
+          <div className="quote-cont">
+            <h1 id="text" style={{ fontFamily: quoteFont }}>
+              <span className="symbol">"</span>
+              {this.state.quote}
+            </h1>
+            <p id="author" style={{ fontFamily: bodyFont }}>
+              {'- ' + this.state.author}
+            </p>
+          </div>
         )}
-        <div className="button-cont">
-          <button id="tweet-quote" className="button">
-            Tweet
-          </button>
+        <div className="button-cont animate-pop-in" style={{ fontFamily: bodyFont }}>
+          <a
+            href={`https://twitter.com/intent/tweet?text=${this.state.quote}++-+${this.state.author}`}
+          >
+            <button id="tweet-quote" className="button">
+              Tweet
+            </button>
+          </a>
           <button id="new-quote" className="button" onClick={this.renderText}>
             New quote
           </button>
