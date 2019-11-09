@@ -58,33 +58,46 @@ class App extends React.Component {
     let [quoteFont, bodyFont] = fontPairs[this.state.fontIndex];
 
     return (
-      <div id="quote-box">
-        {this.state.loading ? (
-          <img className="spinner" src={loading} alt="loading" />
-        ) : (
-          <div className="quote-cont">
-            <h1 id="text" style={{ fontFamily: quoteFont }}>
-              <span className="symbol">"</span>
-              {this.state.quote}
-            </h1>
-            <p id="author" style={{ fontFamily: bodyFont }}>
-              {'- ' + this.state.author}
-            </p>
-          </div>
-        )}
-        <div className="button-cont" style={{ fontFamily: bodyFont }}>
-          <a
-            href={`https://twitter.com/intent/tweet?text=${this.state.quote}++-+${this.state.author}`}
-          >
-            <button id="tweet-quote" className="button">
-              Tweet
+      <>
+        <div id="quote-box">
+          {this.state.loading ? (
+            <img className="spinner" src={loading} alt="loading" />
+          ) : (
+            <div className="quote-cont">
+              <h1 id="text" style={{ fontFamily: quoteFont }}>
+                <span className="symbol">"</span>
+                {this.state.quote}
+              </h1>
+              <p id="author" style={{ fontFamily: bodyFont }}>
+                {'- ' + this.state.author}
+              </p>
+            </div>
+          )}
+          <div className="button-cont" style={{ fontFamily: bodyFont }}>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${this.state.quote}++-+${this.state.author}`}
+            >
+              <button id="tweet-quote" className="button">
+                Tweet
+              </button>
+            </a>
+            <button id="new-quote" className="button" onClick={this.renderText}>
+              New quote
             </button>
-          </a>
-          <button id="new-quote" className="button" onClick={this.renderText}>
-            New quote
-          </button>
+          </div>
         </div>
-      </div>
+        <a href="#footer" className="heart">
+          <span role="img" aria-label="heart">
+            ❤️
+          </span>
+        </a>
+        <footer id="footer" style={{ fontFamily: bodyFont }}>
+          <span>With</span>
+          <span>
+            by <a href="#top">Suheyb</a>
+          </span>
+        </footer>
+      </>
     );
   }
 }
