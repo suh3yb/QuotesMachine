@@ -14,6 +14,15 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a:focus {
+  outline: none;
+}
+
 #root {
   position: absolute;
   top: 0;
@@ -23,14 +32,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: -2;
+  z-index: -3;
 }
 
 #root::before {
   opacity: 0;
   transform: translateY(-4rem);
   animation: no-transform 2s 0.5s cubic-bezier(0, 0.5, 0, 1) forwards;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
     url(./img/background4.jpg) no-repeat top;
   background-size: cover;
   content: '';
@@ -39,26 +48,25 @@ body {
   right: 0;
   bottom: calc(100vw * -1.5 + 100vh);
   left: 0;
-  z-index: -1;
+  z-index: -2;
 }
 
 #quote-box {
   width: 50%;
-  min-height: 35%;
-  margin: auto;
-  color: white;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
   top: calc(50vh - 11rem);
-  z-index: 0;
+  z-index: -1;
 }
 
 .spinner {
   opacity: 0;
   animation: no-transform 0.6s 0.6s ease-out forwards;
   margin: auto;
+  width: 8rem;
 }
 
 .quote-cont {
@@ -68,7 +76,6 @@ body {
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
 }
 
 #text {
@@ -90,17 +97,20 @@ body {
   opacity: 0;
   transform: translateY(-4rem) scale(0.8);
   animation: no-transform 0.6s 0.8s cubic-bezier(0, 0.9, 0.3, 1.2) forwards;
+  position: fixed;
+  bottom: 20vh;
+  width: 40vw;
   display: flex;
   justify-content: space-between;
 }
 
 .button {
-  background: #236863;
+  background: none;
   border-style: none;
   height: 2rem;
   padding: 5px 1rem;
   color: #ffffff;
-  border-radius: 3px;
+  border-radius: 0.25rem;
   font-weight: 700;
   font-size: 0.7rem;
   text-decoration: none;
@@ -109,11 +119,71 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-a {
-  text-decoration: inherit;
-  color: inherit;
+.button::before {
+  background: rgba(150, 150, 150, 0.8);
+  border-radius: 0.25rem;
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.1rem;
+  bottom: -0.1rem;
+  left: 0.1rem;
+  z-index: -1;
+}
+
+.button::after {
+  background: #1a9e3f;
+  border-radius: 0.25rem;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.button:hover {
+  text-decoration: none;
+  transform: scale(1.1);
+}
+
+.button:hover::before {
+  transform: translateY(0.1rem);
+}
+
+button:hover::after {
+  background: #28b54f;
+}
+
+.button:active {
+  transform: translateY(0.2rem);
+  transition: none;
+}
+
+.button:active::before {
+  transform: translateY(-0.1rem);
+  transition: none;
+}
+
+.button,
+.button::before,
+.button::after {
+  transition: all 0.5s cubic-bezier(0, 1, 0.3, 1);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.tweet-icon {
+  background: url(./img/tweet.png) no-repeat center;
+  background-size: cover;
+  width: 1.2rem;
+  height: 1rem;
 }
 
 .heart {
@@ -131,13 +201,40 @@ a {
 }
 
 #footer {
-  color: #ffffff;
+  animation: no-transform 0.6s 2s cubic-bezier(0, 0.9, 0.3, 1.2) forwards;
+  opacity: 0;
+  color: #cccccc;
   position: absolute;
   bottom: calc(100vw * -1.5 + 108vh);
 }
 
 #footer span {
   margin-left: 2.5rem;
+}
+
+#footer a {
+  position: relative;
+  transition: color 0.4s ease-out;
+}
+
+#footer a::after {
+  border-radius: 1rem;
+  border-top: 0.1rem solid #cccccc;
+  content: '';
+  position: absolute;
+  right: 100%;
+  bottom: 0.06rem;
+  left: 0;
+  transition: right 0.4s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
+}
+
+#footer a:hover {
+  color: #ffffff;
+}
+
+#footer a:hover::after {
+  right: 0;
+  border-color: #ffffff;
 }
 
 /* Media Queries */

@@ -73,18 +73,20 @@ class App extends React.Component {
               </p>
             </div>
           )}
-          <div className="button-cont" style={{ fontFamily: bodyFont }}>
-            <a
-              href={`https://twitter.com/intent/tweet?text=${this.state.quote}++-+${this.state.author}`}
-            >
-              <button id="tweet-quote" className="button">
-                Tweet
-              </button>
-            </a>
-            <button id="new-quote" className="button" onClick={this.renderText}>
-              New quote
+        </div>
+        <div className="button-cont" style={{ fontFamily: bodyFont }}>
+          <a
+            href={`https://twitter.com/intent/tweet?text=${this.state.quote}++-+${this.state.author}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button id="tweet-quote" className="button">
+              <i className="tweet-icon"></i>
             </button>
-          </div>
+          </a>
+          <button id="new-quote" className="button" onClick={this.renderText}>
+            New quote
+          </button>
         </div>
         <a href="#footer" className="heart">
           <span role="img" aria-label="heart">
