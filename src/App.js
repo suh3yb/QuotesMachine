@@ -13,7 +13,15 @@ class App extends React.Component {
       fontIndex: 0,
     };
 
+    document.body.className += ' js-loading';
+    window.addEventListener('load', this.showPage, false);
+
+    this.showPage = this.showPage.bind(this);
     this.renderText = this.renderText.bind(this);
+  }
+
+  showPage() {
+    document.body.className = document.body.className.replace('js-loading', '');
   }
 
   async componentDidMount() {
@@ -64,7 +72,7 @@ class App extends React.Component {
             </p>
           </div>
         )}
-        <div className="button-cont animate-pop-in" style={{ fontFamily: bodyFont }}>
+        <div className="button-cont" style={{ fontFamily: bodyFont }}>
           <a
             href={`https://twitter.com/intent/tweet?text=${this.state.quote}++-+${this.state.author}`}
           >
