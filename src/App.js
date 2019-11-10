@@ -111,7 +111,7 @@ class App extends React.Component {
         <footer id="footer">
           <span>With</span>
           <span>
-            by <a href="#top">Suheyb</a>
+            by <a href="https://github.com/suh3yb/QuotesMachine">Suheyb</a>
           </span>
         </footer>
       </>

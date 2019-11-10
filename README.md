@@ -1,9 +1,10 @@
-## Quote Machine
+## Quote Machine ![favicon](/public/favicon.ico)
 
 Shows a random quote
+
 A Front-End Application with React
 
-#### Credits
+### Credits
 
 - **React:** [React](https://reactjs.org/)
 - **Quotes API:** [quotable](https://github.com/lukePeavey/quotable)
