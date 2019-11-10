@@ -11,6 +11,8 @@ class App extends React.Component {
       quote: '',
       loading: true,
       fontIndex: 0,
+      error: false,
+      errorMessage: null,
     };
 
     document.body.className += ' js-loading';
@@ -25,23 +27,31 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const quoteObj = await fetchQuote();
-    this.setState({ author: quoteObj.author, quote: quoteObj.content, loading: false });
+    try {
+      const { author, content } = await fetchQuote();
+      this.setState({ author, quote: content, loading: false });
+    } catch (error) {
+      return this.setState({ loading: false, error: true, errorMessage: error.message });
+    }
   }
 
   async renderText() {
-    this.setState({ loading: true, quote: '', author: '' });
-    let { content, author } = await fetchQuote();
-    const showText = (text, key, index) => {
-      if (index < text.length) {
-        this.setState({ [key]: this.state[key] + text[index++] });
-        setTimeout(() => showText(text, key, index), 20);
-      }
-    };
-    let fontIndex = Math.floor(Math.random() * 7);
-    this.setState({ loading: false, fontIndex });
-    showText(content, 'quote', 0);
-    showText(author, 'author', 0);
+    try {
+      this.setState({ loading: true, quote: '', author: '' });
+      let { content, author } = await fetchQuote();
+      const showText = (text, key, index) => {
+        if (index < text.length) {
+          this.setState({ [key]: this.state[key] + text[index++] });
+          setTimeout(() => showText(text, key, index), 20);
+        }
+      };
+      let fontIndex = Math.floor(Math.random() * 7);
+      this.setState({ loading: false, fontIndex });
+      showText(content, 'quote', 0);
+      showText(author, 'author', 0);
+    } catch (error) {
+      return this.setState({ loading: false, error: true, errorMessage: error.message });
+    }
   }
 
   render() {
@@ -62,6 +72,11 @@ class App extends React.Component {
         <div id="quote-box">
           {this.state.loading ? (
             <img className="spinner" src={loading} alt="loading" />
+          ) : this.state.error ? (
+            <>
+              <h1 id="text">An error occured. Please refresh the page and try again</h1>
+              <p>Error message: {this.state.errorMessage}</p>
+            </>
           ) : (
             <div className="quote-cont">
               <h1 id="text" style={{ fontFamily: quoteFont }}>
@@ -73,27 +88,27 @@ class App extends React.Component {
               </p>
             </div>
           )}
-        </div>
-        <div className="button-cont" style={{ fontFamily: bodyFont }}>
-          <a
-            href={`https://twitter.com/intent/tweet?text=${this.state.quote}++-+${this.state.author}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button id="tweet-quote" className="button">
-              <i className="tweet-icon"></i>
+          <div className="button-cont">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${this.state.quote}%0A-%20${this.state.author}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button id="tweet-quote" className="button">
+                <i className="tweet-icon"></i>
+              </button>
+            </a>
+            <button id="new-quote" className="button" onClick={this.renderText}>
+              New quote
             </button>
-          </a>
-          <button id="new-quote" className="button" onClick={this.renderText}>
-            New quote
-          </button>
+          </div>
         </div>
         <a href="#footer" className="heart">
           <span role="img" aria-label="heart">
             ❤️
           </span>
         </a>
-        <footer id="footer" style={{ fontFamily: bodyFont }}>
+        <footer id="footer">
           <span>With</span>
           <span>
             by <a href="#top">Suheyb</a>

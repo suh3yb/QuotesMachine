@@ -12,6 +12,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -64,9 +65,9 @@ a:focus {
 
 .spinner {
   opacity: 0;
-  animation: no-transform 0.6s 0.6s ease-out forwards;
+  animation: opacity-7 0.6s 0.6s ease-out forwards;
   margin: auto;
-  width: 8rem;
+  width: 6rem;
 }
 
 .quote-cont {
@@ -100,6 +101,7 @@ a:focus {
   position: fixed;
   bottom: 20vh;
   width: 40vw;
+  align-self: center;
   display: flex;
   justify-content: space-between;
 }
@@ -120,6 +122,7 @@ a:focus {
   align-items: center;
   justify-content: center;
   position: relative;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .button::before {
@@ -239,11 +242,31 @@ button:hover::after {
 
 /* Media Queries */
 @media (max-width: 570px) {
+  html {
+    font-size: 12px;
+  }
+
+  #root::before {
+    position: absolute;
+    bottom: 0;
+  }
+
+  #quote-box {
+    position: relative;
+    top: 8vh;
+    min-height: 60%;
+  }
+
+  .quote-cont {
+    flex-grow: 0;
+  }
+
   .symbol {
     display: none;
   }
 
   .button-cont {
+    position: initial;
     flex-direction: column;
   }
 
@@ -251,11 +274,20 @@ button:hover::after {
     width: 100%;
     margin-top: 1rem;
   }
+
+  .heart {
+    position: absolute;
+    bottom: 8vh;
+  }
+
+  #footer {
+    bottom: 8vh;
+  }
 }
 
 @media (min-width: 720px) {
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   #quote-box {
@@ -265,7 +297,7 @@ button:hover::after {
 
 @media (min-width: 960px) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   #quote-box {
@@ -275,7 +307,7 @@ button:hover::after {
 
 @media (min-width: 1080px) {
   html {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   #quote-box {
@@ -285,7 +317,7 @@ button:hover::after {
 
 @media (min-width: 1280px) {
   html {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   #quote-box {
@@ -327,10 +359,27 @@ button:hover::after {
   }
 }
 
+@media (max-height: 470px) {
+  html {
+    font-size: 14px;
+  }
+
+  #quote-box {
+    top: 8vh;
+  }
+}
+
 /* Animations */
 @keyframes no-transform {
   100% {
     opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes opacity-7 {
+  100% {
+    opacity: 0.7;
     transform: none;
   }
 }

@@ -5,7 +5,7 @@ const fetchQuote = async () => {
     const response = await fetch(URL);
     return await response.json();
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 };
 
