@@ -111,7 +111,14 @@ class App extends React.Component {
         <footer id="footer">
           <span>With</span>
           <span>
-            by <a href="https://github.com/suh3yb/QuotesMachine">Suheyb</a>
+            by{' '}
+            <a
+              href="https://github.com/suh3yb/QuotesMachine"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Suheyb
+            </a>
           </span>
         </footer>
       </>
