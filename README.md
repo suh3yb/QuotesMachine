@@ -4,6 +4,8 @@ Shows a random quote
 
 A Front-End Application with React
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c36c9de5-980d-466d-9e2a-e91c50280539/deploy-status)](https://app.netlify.com/sites/quotesmachinedev/deploys)
+
 ### Credits
 
 - **React:** [React](https://reactjs.org/)
